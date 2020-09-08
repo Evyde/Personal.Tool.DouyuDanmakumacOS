@@ -1,0 +1,11 @@
+zh_CN:
+  name: 斗鱼弹幕姬
+  about: 关于
+  inputRoomID: "请输入房间号："
+  sendToYouGifts: 送了礼物给你！！！
+  description: "来自群友Evyde HF的❤️，送给最好的Gabbie～\n
+  特别感谢：\n
+  [IsoaSFlus/danmaku](https://github.com/IsoaSFlus/danmaku)\n
+  [jaredks/rumps](https://github.com/jaredks/rumps)\n
+  [ChengHaoMou/touchbar-lyric](https://github.com/ChenghaoMou/touchbar-lyric)\n
+  版本：%{version}"

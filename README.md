@@ -4,6 +4,6 @@
 # 感谢
 - [IsoaSFlus/danmaku](https://github.com/IsoaSFlus/danmaku)
 - [jaredks/rumps](https://github.com/jaredks/rumps)
-- [ChengHaoMou](https://github.com/ChenghaoMou/touchbar-lyric)
+- [ChengHaoMou/touchbar-lyric](https://github.com/ChenghaoMou/touchbar-lyric)
   
 For Gabbie!
