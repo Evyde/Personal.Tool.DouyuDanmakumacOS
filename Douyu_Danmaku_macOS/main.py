@@ -32,8 +32,24 @@ i18n.set('locale', 'zh_CN')
 i18n.set('fallback', "en_US")
 i18n.set('file_format', 'yaml')
 i18n.set('filename_format', '{locale}.{format}')
-i18n.load_path.append("./i18n")
+i18n.load_path.append("Douyu_Danmaku_macOS\\i18n")
 print(i18n.t('description', version=version))
 print(i18n.t('name'))
+class TestApp(rumps.App):
+    @rumps.clicked("Preferences")
+    def prefs(self, _):
+        rumps.alert("jk! no preferences available!")
+
+    @rumps.clicked("Silly button")
+    def onoff(self, sender):
+        sender.state = not sender.state
+
+    @rumps.clicked("Say hi")
+    def sayhi(self, _):
+        rumps.notification("Awesome title", "amazing subtitle", "hi!!1")
+
+if __name__ == "__main__":
+    TestApp("test").run()
+
 
 #asyncio.run(main())
