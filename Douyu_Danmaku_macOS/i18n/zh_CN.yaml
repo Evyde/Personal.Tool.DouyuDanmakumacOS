@@ -1,5 +1,6 @@
 zh_CN:
   name: 斗鱼弹幕姬
+  title: 斗鱼弹幕姬
   about: 关于
   inputRoomID: "请输入房间号："
   sendToYouGifts: 送了礼物给你！！！
@@ -8,4 +9,7 @@ zh_CN:
   [IsoaSFlus/danmaku](https://github.com/IsoaSFlus/danmaku)\n
   [jaredks/rumps](https://github.com/jaredks/rumps)\n
   [ChengHaoMou/touchbar-lyric](https://github.com/ChenghaoMou/touchbar-lyric)\n
-  版本：%{version}"
+  \t版本：%{version}\n
+  Github: [ForeverOpp]"
+  giftNotification: 礼物🎁！！！！
+  quit: 退出

@@ -1,5 +1,7 @@
 # Douyu_Danmaku_For_macOS
-发现macOS上面确实没什么好的斗鱼弹幕查看软件，先撸一个只有消息和礼物提醒的东西出来。
+[中文文档](READMES/README_zh_CN.md)  |  [English](README.md)  
+
+I found that there is not a usable Danmaku software for douyu, So I 
 
 # 感谢
 - [IsoaSFlus/danmaku](https://github.com/IsoaSFlus/danmaku)
