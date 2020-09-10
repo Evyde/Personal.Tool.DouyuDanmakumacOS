@@ -6,19 +6,3 @@ import threading
 import i18n
 
 import modules, views
-# 1165924
-
-
-
-
-
-
-
-
-
-
-m()
-
-
-
-#

@@ -4,9 +4,11 @@ import time
 import danmaku
 import i18n
 import globalvars, views, threading
+import configparser
+import logging as log
 
 
-# this class should have only single instance
+# This class should have only single instance
 # TODO: SINGLE INSTANCE CHECK
 class DanmakuGetter:
     def startLoop(self, loop):
@@ -36,8 +38,8 @@ class DanmakuGetter:
         await dmc.start()
 
 
-# TODO: INITALIZE SHOULD USE INSTANCE BUT CLASS
-def initalize():
+def init():
+    global configPath, app, logPath
     # Configure i18n
     i18n.set('available_locales', ['en_US', 'zh_CN'])
     i18n.set('locale', 'zh_CN')
@@ -46,13 +48,21 @@ def initalize():
     i18n.set('filename_format', '{locale}.{format}')
     i18n.load_path.append()
 
-    global app
+    # Configure log
+    # Remember to change `log.DEBUG` to INFO or something.
+    log.basicConfig(filename=logPath, level=log.DEBUG)
+
+    # Configure config.ini
+    cfg = configparser.ConfigParser()
+    cfg.read(configPath, encoding="utf-8")
+
     app = views.DouyuDanmakuApp(name=i18n.t('appName'),
                                 title=i18n.t('title'),
-                                # icon="❤️",
+                                # icon=iconPath,
                                 quit_button=i18n.t('quit'))
     app.title = i18n.t('name')
-    con = DanmakuGetter.mainLoop()
+    getter = DanmakuGetter()
+    con = getter.mainLoop()
     newLoop = asyncio.new_event_loop()
     t = threading.Thread(target=DanmakuGetter.startLoop, args=(newLoop,))
     t.setDaemon(False)
