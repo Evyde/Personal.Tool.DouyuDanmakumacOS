@@ -3,7 +3,7 @@ import time
 
 import danmaku
 import i18n
-import globalvars, threading
+import globalvars, threading, views
 import configparser
 import logging as log
 
@@ -40,15 +40,14 @@ class DanmakuGetter:
 
 def init():
     # Configure i18n
-    i18n.set('available_locales', ['en_US', 'zh_CN'])
-    i18n.set('locale', globalvars.lan)
-    i18n.set('fallback', "en_US")
-    i18n.set('file_format', 'yaml')
-    i18n.set('filename_format', '{locale}.{format}')
-    i18n.load_path.append(globalvars.i18nPath)
+    # TODO: I18N SHOULD SHARE AS GLOBAL
+    globalvars.i18n.set('available_locales', ['en_US', 'zh_CN'])
+    globalvars.i18n.set('locale', globalvars.lan)
+    globalvars.i18n.set('fallback', "en_US")
+    globalvars.i18n.set('file_format', 'yaml')
+    globalvars.i18n.set('filename_format', '{locale}.{format}')
+    globalvars.i18n.load_path.append(globalvars.i18nPath)
 
-    print(i18n.t("name"))
-    quit()
     # Configure log
     # Remember to change `log.DEBUG` to INFO or something.
     log.basicConfig(filename=globalvars.logPath, level=log.DEBUG)
@@ -57,15 +56,15 @@ def init():
     cfg = configparser.ConfigParser()
     cfg.read(globalvars.configPath, encoding="utf-8")
 
-    app = views.DouyuDanmakuApp(name=i18n.t('appName'),
-                                title=i18n.t('title'),
+    app = views.DouyuDanmakuAppViewer(name=globalvars.i18n.t('name'),
+                                title=globalvars.i18n.t('title'),
                                 # icon=iconPath,
-                                quit_button=i18n.t('quit'))
-    app.title = i18n.t('name')
+                                quit_button=globalvars.i18n.t('quit'))
+    app.title = globalvars.i18n.t('name')
     getter = DanmakuGetter()
     con = getter.mainLoop()
     newLoop = asyncio.new_event_loop()
-    t = threading.Thread(target=DanmakuGetter.startLoop, args=(newLoop,))
+    t = threading.Thread(target=getter.startLoop, args=(newLoop,))
     t.setDaemon(False)
     t.start()
     asyncio.run_coroutine_threadsafe(con, newLoop)

@@ -9,10 +9,16 @@ class DouyuDanmakuAppViewer(rumps.App):
     def prefs(self, _):
         pass
 
-    @rumps.clicked("Silly button")
+    @rumps.clicked(globalvars.i18n.t('isGiftNotification'))
     def onoff(self, sender):
+        print(sender)
+        print(sender.state)
         sender.state = not sender.state
 
-    @rumps.clicked(i18n.t('about'))
+    @rumps.clicked(globalvars.i18n.t('about'))
     def sayhi(self, _):
-        rumps.alert(i18n.t('description', version=globalvars.version))
+        rumps.alert(globalvars.i18n.t('description', version=globalvars.version))
+
+    @rumps.clicked('Animal', 'Dog', 'Corgi')
+    def corgi_button(self, sender):
+        print(sender)
