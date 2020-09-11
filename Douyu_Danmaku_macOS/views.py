@@ -3,7 +3,7 @@ import globalvars
 
 
 # TODO: ADD AN INTERFACE TO ALLOW USER SET THEIR ROOMID
-# TODO: ADD
+# TODO: ADD A FUNCTION: WHEN USER CLICK STATUS BAR, STOP RECEIVING DANMAKU
 class DouyuDanmakuAppViewer(rumps.App):
     @rumps.clicked("Preferences")
     def prefs(self, _):

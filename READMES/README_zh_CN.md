@@ -1,5 +1,6 @@
 # 斗鱼弹幕姬  
 [中文文档](README_zh_CN.md) | [English](../README.md)  
+
 发现macOS上面确实没什么好的斗鱼弹幕查看软件，先撸一个只有消息和礼物提醒的东西出来。
 
 # 使用方法
@@ -8,6 +9,9 @@
 
 # 待办事项（欲增加的功能）
 - [ ] TouchBar 实时弹幕功能
+
+# 已知问题
+暂时没有。
 
 # 特别感谢
 - [IsoaSFlus/danmaku](https://github.com/IsoaSFlus/danmaku)

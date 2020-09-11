@@ -3,7 +3,7 @@ import time
 
 import danmaku
 import i18n
-import globalvars, views, threading
+import globalvars, threading
 import configparser
 import logging as log
 
@@ -39,22 +39,23 @@ class DanmakuGetter:
 
 
 def init():
-    global configPath, app, logPath
     # Configure i18n
     i18n.set('available_locales', ['en_US', 'zh_CN'])
-    i18n.set('locale', 'zh_CN')
+    i18n.set('locale', globalvars.lan)
     i18n.set('fallback', "en_US")
     i18n.set('file_format', 'yaml')
     i18n.set('filename_format', '{locale}.{format}')
-    i18n.load_path.append()
+    i18n.load_path.append(globalvars.i18nPath)
 
+    print(i18n.t("name"))
+    quit()
     # Configure log
     # Remember to change `log.DEBUG` to INFO or something.
-    log.basicConfig(filename=logPath, level=log.DEBUG)
+    log.basicConfig(filename=globalvars.logPath, level=log.DEBUG)
 
     # Configure config.ini
     cfg = configparser.ConfigParser()
-    cfg.read(configPath, encoding="utf-8")
+    cfg.read(globalvars.configPath, encoding="utf-8")
 
     app = views.DouyuDanmakuApp(name=i18n.t('appName'),
                                 title=i18n.t('title'),

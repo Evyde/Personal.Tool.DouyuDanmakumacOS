@@ -10,6 +10,9 @@ Talking about the other items, like the menu, I have no idea about that, see u t
 # TODO List
 - [ ] Display danmuku on TouchBar.
 
+# Known Issues
+Fortunately, none until now.
+
 # Special Thanks
 - [IsoaSFlus/danmaku](https://github.com/IsoaSFlus/danmaku)
 - [jaredks/rumps](https://github.com/jaredks/rumps)
