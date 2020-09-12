@@ -5,7 +5,7 @@ import threading
 # import py2app
 import i18n, locale
 
-import modules, views
+import modules
 import globalvars
 
 # Get system language

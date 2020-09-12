@@ -3,7 +3,7 @@ import time
 
 import danmaku
 import i18n
-import globalvars, threading, views
+import globalvars, threading
 import configparser
 import logging as log
 
@@ -40,7 +40,6 @@ class DanmakuGetter:
 
 def init():
     # Configure i18n
-    # TODO: I18N SHOULD SHARE AS GLOBAL
     globalvars.i18n.set('available_locales', ['en_US', 'zh_CN'])
     globalvars.i18n.set('locale', globalvars.lan)
     globalvars.i18n.set('fallback', "en_US")
@@ -56,6 +55,8 @@ def init():
     cfg = configparser.ConfigParser()
     cfg.read(globalvars.configPath, encoding="utf-8")
 
+    # Import views now because of global i18n
+    import views
     app = views.DouyuDanmakuAppViewer(name=globalvars.i18n.t('name'),
                                 title=globalvars.i18n.t('title'),
                                 # icon=iconPath,

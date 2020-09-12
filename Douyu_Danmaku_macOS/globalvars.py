@@ -6,4 +6,4 @@ iconPath = "icon.ico"
 configPath = "config.ini"
 logPath = "danmaku.log"
 lan = "zh_CN"
-
+isGiftNotification = False
