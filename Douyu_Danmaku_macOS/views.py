@@ -11,7 +11,7 @@ class DouyuDanmakuAppViewer(rumps.App):
 
     @rumps.clicked(globalvars.i18n.t('preferences'))
     def prefs(self, _):
-        rumps.Window("输入房间号", globalvars.i18n.t('inputRoomID')).run()
+        print(rumps.Window("输入房间号", globalvars.i18n.t('inputRoomID')).run())
 
     @rumps.clicked(globalvars.i18n.t('isGiftNotification'))
     def giftNotificationOnoff(self, sender):
