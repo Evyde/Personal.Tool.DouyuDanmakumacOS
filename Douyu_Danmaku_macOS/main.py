@@ -5,6 +5,7 @@ import locale, modules
 import globalvars
 
 # Get system language
+# TODO: When people chose the program language, it should use user's language, not detect locale language.
 if "en" in locale.getdefaultlocale()[0]:
     globalvars.lan = "en_US"
 else:
@@ -13,18 +14,7 @@ else:
 
 
 modules.init()
-from rumps import *
 
-try:
-    from urllib import urlretrieve
-except ImportError:
-    from urllib.request import urlretrieve
-
-def sayhello(sender):
-    print('hello {}'.format(sender))
-
-def e(_):
-    print('EEEEEEE')
 
 def adjust_f(sender):
     if adjust_f.huh:
@@ -48,24 +38,7 @@ f = MenuItem('F', callback=adjust_f)
 
 urlretrieve('http://upload.wikimedia.org/wikipedia/commons/thumb/c/'
             'c4/Kiss_Logo.svg/200px-Kiss_Logo.svg.png', 'kiss.png')
-app = App('lovegun', icon='kiss.png')
-app.menu = [
-    MenuItem('A', callback=print_f, key='F'),
-    ('B', ['1', 2, '3', [4, [5, (6, range(7, 14))]]]),
-    'C',
-    [MenuItem('D', callback=sayhello), (1, 11, 111)],
-    MenuItem('E', callback=e, key='e'),
-    f,
-    None,
-    {
-        'x': {'hello', 'hey'},
-        'y': ['what is up']
-    },
-    [1, [2]],
-    ('update method', ['walking', 'back', 'to', 'you']),
-    'stuff',
-    None
-]
+
 
 @clicked('update method')
 def dict_update(menu):
@@ -93,4 +66,3 @@ def stuff(sender):
         sender.update(['hey', ['ho', MenuItem('HOOOO')], 'lets', 'teenage'], the=['who', 'is', 'band'])
         sender.add('waste land')
 
-app.run()
