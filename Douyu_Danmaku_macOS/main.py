@@ -12,7 +12,7 @@ else:
 
 
 
-# modules.init()
+modules.init()
 from rumps import *
 
 try:
