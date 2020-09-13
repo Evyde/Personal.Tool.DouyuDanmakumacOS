@@ -1,6 +1,6 @@
 # import esky
 # import py2app
-import locale
+import locale, modules
 
 import globalvars
 

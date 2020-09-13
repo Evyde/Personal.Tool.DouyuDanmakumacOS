@@ -1,4 +1,4 @@
-import rumps.rumps
+from rumps import *
 import globalvars
 
 
@@ -7,23 +7,25 @@ import globalvars
 class DouyuDanmakuAppViewer(App):
     def __init__(self, **args):
         super().__init__(**args)
+        isGiftNotificationMenuItem = MenuItem(globalvars.i18n.t('isGiftNotification'), callback=self.giftNotificationOnoff, key='G')
+        isGiftNotificationMenuItem.state = True
         self.menu = [
-            [
-                globalvars.i18n.t('preferences'), (MenuItem(globalvars.i18n.t('isGiftNotification'), key='G'),
-                                                   MenuItem(globalvars.i18n.t('inputRoomIDTitle', key='I'))
-                                                   )
-            ],
-            None,
             globalvars.i18n.t('about'),
+            None,
+            [
+                globalvars.i18n.t('preferences'),
+                        (isGiftNotificationMenuItem,
+                        MenuItem(globalvars.i18n.t('inputRoomIDTitle'), callback=self.inputRoomID, key='I')
+                        )
+            ],
             None
         ]
 
 
-    @clicked(globalvars.i18n.t('preferences'))
-    def prefs(self, _):
-        print(rumps.Window(globalvars.i18n.t('inputRoomIDTitle'), globalvars.i18n.t('inputRoomID')).run())
+    def inputRoomID(self, _):
+        print(rumps.Window(globalvars.i18n.t('inputRoomIDTitle'), globalvars.i18n.t('inputRoomID')).run().text)
 
-    @clicked(globalvars.i18n.t('isGiftNotification'))
+
     def giftNotificationOnoff(self, sender):
         sender.state = not sender.state
         globalvars.isGiftNotification = sender
@@ -31,8 +33,3 @@ class DouyuDanmakuAppViewer(App):
     @clicked(globalvars.i18n.t('about'))
     def sayhi(self, _):
         rumps.alert(globalvars.i18n.t('description', version=globalvars.version))
-
-    @clicked('Animal', 'Dog', 'Corgi')
-    def corgi_button(self, sender):
-        print(sender)
-        print(globalvars.i18n.t('about'))
