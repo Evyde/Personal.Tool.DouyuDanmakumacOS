@@ -5,11 +5,7 @@ import locale, modules
 import globalvars
 
 # Get system language
-# TODO: When people chose the program language, it should use user's language, not detect locale language.
-if "en" in locale.getdefaultlocale()[0]:
-    globalvars.lan = "en_US"
-else:
-    globalvars.lan = locale.getdefaultlocale()[0]
+
 
 
 

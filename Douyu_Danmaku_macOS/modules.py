@@ -1,16 +1,17 @@
 import asyncio
-import time
+import time, locale
 
 import danmaku
 import i18n
 import globalvars, threading
 import configparser
-import logging as log
 
 
 # This class should have only single instance
 # TODO: SINGLE INSTANCE CHECK
 class DanmakuGetter:
+    __roomID = 0
+
     def startLoop(self, loop):
         asyncio.set_event_loop(loop)
         loop.run_forever()
@@ -30,30 +31,40 @@ class DanmakuGetter:
                 time.sleep(0.5)
 
     async def mainLoop(self):
-        global app
         q = asyncio.Queue()
-        roomID = int(input(i18n.t('inputRoomID')))
-        dmc = danmaku.DanmakuClient("https://douyu.com/%d" % roomID, q)
+        dmc = danmaku.DanmakuClient("https://douyu.com/%d" % self.__roomID, q)
         asyncio.create_task(self.printer(q))
         await dmc.start()
 
 
 def init():
+    # Configure log
+    # Remember to change `log.DEBUG` to INFO or something.
+    globalvars.log.basicConfig(filename=globalvars.logPath, level=log.DEBUG)
+    globalvars.log.info("Start running.")
+    globalvars.log.info("Logging config complete.")
+
+    # Configure config.ini
+    globalvars.cfg = configparser.ConfigParser()
+    globalvars.cfg.read(globalvars.configPath, encoding="utf-8")
+    globalvars.log.info("Config loaded.")
+    configLan = globalvars.cfg.get("common", "lan")
+    if configLan == "default":
+        globalvars.log.warning("Language not set, set from system.")
+        if "en" in locale.getdefaultlocale()[0]:
+            configLan = "en_US"
+        else:
+            configLan = locale.getdefaultlocale()[0]
+    globalvars.lan = configLan
+
     # Configure i18n
-    globalvars.i18n.set('available_locales', ['en_US', 'zh_CN'])
+    globalvars.log.info("Language set to: %s" % globalvars.lan)
+    globalvars.i18n.set('available_locales', globalvars.availableLocales)
     globalvars.i18n.set('locale', globalvars.lan)
     globalvars.i18n.set('fallback', "en_US")
     globalvars.i18n.set('file_format', 'yaml')
     globalvars.i18n.set('filename_format', '{locale}.{format}')
     globalvars.i18n.load_path.append(globalvars.i18nPath)
-
-    # Configure log
-    # Remember to change `log.DEBUG` to INFO or something.
-    log.basicConfig(filename=globalvars.logPath, level=log.DEBUG)
-
-    # Configure config.ini
-    cfg = configparser.ConfigParser()
-    cfg.read(globalvars.configPath, encoding="utf-8")
 
     # Import views now because of global i18n
     import views
