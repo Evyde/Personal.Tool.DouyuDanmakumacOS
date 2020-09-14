@@ -9,14 +9,17 @@ class DouyuDanmakuAppViewer(App):
                                               callback=self.giftNotificationOnoff, key='G')
         isGiftNotificationMenuItem.state = True
         # TODO: ADD AN INTERFACE TO ALLOW USER CHANGE LANGUAGE
-        for i in globalvars.i18n.
+        localItems = []
+        for locale in globalvars.i18n.settings['available_locales']:
+            localItems.append(MenuItem(globalvars.i18n.t('lan', locale=locale), callback=self.sender))
         self.menu = [
             globalvars.i18n.t('about'),
             None,
             [
                 globalvars.i18n.t('preferences'),
                 (isGiftNotificationMenuItem,
-                 MenuItem(globalvars.i18n.t('inputRoomIDTitle'), callback=self.inputRoomID, key='I')
+                 MenuItem(globalvars.i18n.t('inputRoomIDTitle'), callback=self.inputRoomID, key='I'),
+                 [globalvars.i18n.t('languageSetting'), localItems]
                  )
             ],
             None
@@ -32,3 +35,6 @@ class DouyuDanmakuAppViewer(App):
     @clicked(globalvars.i18n.t('about'))
     def about(self, _):
         alert(globalvars.i18n.t('description', version=globalvars.version))
+
+    def changeLanguage(self, sender):
+        print(sender.title)
